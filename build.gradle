@@ -1,0 +1,29 @@
+apply plugin: 'idea'
+
+group 'npetzall.smf4j'
+
+subprojects {
+
+  apply plugin: 'java'
+  apply plugin: 'osgi'
+  apply plugin: 'maven'
+  apply plugin: 'maven-publish'
+
+  sourceCompatibility = 1.7
+  targetCompatibility = 1.7
+
+  repositories {
+      mavenLocal()
+      mavenCentral()
+      jcenter()
+  }
+
+  task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+  }
+
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.12'
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint
+        xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+        default-activation="lazy">
+
+    <bean id="DropwizardMetrics" class="npetzall.smf4j.dropwizard.MetricsServiceImpl" />
+
+    <service ref="DropwizardMetrics" interface="npetzall.smf4j.api.MetricsService" />
+
+</blueprint>

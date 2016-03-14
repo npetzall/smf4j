@@ -1,0 +1,3 @@
+rootProject.name = 'Simple Metrics Facade For Java'
+include 'api'
+include 'dropwizard-metrics'
