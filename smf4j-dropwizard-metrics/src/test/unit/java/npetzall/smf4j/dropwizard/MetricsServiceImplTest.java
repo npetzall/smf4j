@@ -1,11 +1,10 @@
-package ut.npetzall.smf4j.dropwizard;
+package npetzall.smf4j.dropwizard;
 
 import com.codahale.metrics.MetricRegistry;
 import npetzall.smf4j.api.metrics.Counter;
 import npetzall.smf4j.api.metrics.Histogram;
 import npetzall.smf4j.api.metrics.Meter;
 import npetzall.smf4j.api.metrics.Timer;
-import npetzall.smf4j.dropwizard.MetricsServiceImpl;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

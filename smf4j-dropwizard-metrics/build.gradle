@@ -1,0 +1,64 @@
+version '0.0.1'
+
+sourceSets {
+    test {
+        java.srcDir file('src/test/unit/java')
+        resources.srcDir file('src/test/unit/resources')
+    }
+    integration {
+        java.srcDir file('src/test/integration/java')
+        resources.srcDir file('src/test/integration/resources')
+    }
+}
+
+configurations {
+    integrationCompile
+    integrationCompile.extendsFrom compile, testCompile
+    integrationRuntime
+    integrationRuntime.extendsFrom runtime, testRuntime
+}
+
+idea {
+    module {
+        scopes.TEST.plus = [configurations.integrationCompile]
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+dependencies {
+    compile project(':smf4j-api')
+    compile 'io.dropwizard.metrics:metrics-core:3.1.2'
+    //compile 'io.dropwizard.metrics:metrics-jvm:3.1.2'
+    compile 'org.slf4j:slf4j-api:1.7.13'
+    testCompile 'org.assertj:assertj-core:2.1.0'
+    testCompile 'junit:junit:4.12'
+    //testRuntime 'org.codehaus.sonar-plugins.java:sonar-jacoco-listeners:3.2'
+}
+
+dependencies {
+    def paxExamVersion = "4.7.0"
+    integrationCompile "org.ops4j.pax.exam:pax-exam-container-karaf:${paxExamVersion}"
+    integrationCompile "org.ops4j.pax.exam:pax-exam-junit4:${paxExamVersion}"
+    integrationCompile "org.ops4j.pax.exam:pax-exam:${paxExamVersion}"
+    integrationCompile "org.ops4j.pax.url:pax-url-aether:2.4.5"
+    integrationCompile "javax.inject:javax.inject:1"
+}
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integration.output.classesDir
+    classpath = sourceSets.integration.runtimeClasspath
+    outputs.upToDateWhen { false }
+}
+
+publishing {
+    publications {
+        mavenDropwizardMetrics(MavenPublication) {
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+}

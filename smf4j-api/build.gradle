@@ -1,0 +1,13 @@
+version '0.0.1'
+
+publishing {
+    publications {
+        mavenApi(MavenPublication) {
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+}
