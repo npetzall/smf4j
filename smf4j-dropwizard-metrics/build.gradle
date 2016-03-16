@@ -12,9 +12,7 @@ sourceSets {
 }
 
 configurations {
-    integrationCompile
     integrationCompile.extendsFrom compile, testCompile
-    integrationRuntime
     integrationRuntime.extendsFrom runtime, testRuntime
 }
 
