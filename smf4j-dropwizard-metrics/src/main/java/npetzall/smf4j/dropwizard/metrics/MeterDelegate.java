@@ -19,4 +19,9 @@ public class MeterDelegate implements npetzall.smf4j.api.metrics.Meter {
     public void happened(long numberOfTimes) {
         meter.mark(numberOfTimes);
     }
+
+    @Override
+    public long getCount() {
+        return meter.getCount();
+    }
 }

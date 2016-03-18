@@ -29,4 +29,9 @@ public class CounterDelegate implements npetzall.smf4j.api.metrics.Counter {
     public void decrement(long value) {
         counter.dec(value);
     }
+
+    @Override
+    public long getCount() {
+        return counter.getCount();
+    }
 }

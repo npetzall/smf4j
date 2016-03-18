@@ -7,12 +7,9 @@ import npetzall.smf4j.api.metrics.Timer;
 
 public interface MetricsRegistry {
 
-    Counter getCounter(Class clazz, String...qualifiers);
-
-    Histogram getHistogram(Class clazz, String...qualifiers);
-
-    Meter getMeter(Class clazz, String...qualifiers);
-
-    Timer getTimer(Class clazz, String...qualifiers);
+    Counter getCounter(Class clazz, String...name);
+    Histogram getHistogram(Class clazz, String...name);
+    Meter getMeter(Class clazz, String...name);
+    Timer getTimer(Class clazz, String...name);
 
 }

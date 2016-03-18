@@ -23,8 +23,6 @@ subprojects {
     task sourceJar(type: Jar) {
         from sourceSets.main.allSource
     }
-
-
 }
 
 task wrapper(type: Wrapper) {

@@ -30,23 +30,48 @@ dependencies {
     //compile 'io.dropwizard.metrics:metrics-jvm:3.1.2'
     compile 'org.slf4j:slf4j-api:1.7.13'
     testCompile 'org.assertj:assertj-core:2.1.0'
-    testCompile 'junit:junit:4.12'
+    testCompile 'org.testng:testng:6.9.10'
     //testRuntime 'org.codehaus.sonar-plugins.java:sonar-jacoco-listeners:3.2'
 }
 
 dependencies {
     def paxExamVersion = "4.7.0"
+    integrationCompile "org.osgi:org.osgi.core:4.3.1"
     integrationCompile "org.ops4j.pax.exam:pax-exam-container-karaf:${paxExamVersion}"
     integrationCompile "org.ops4j.pax.exam:pax-exam-junit4:${paxExamVersion}"
+    integrationCompile "org.ops4j.pax.exam:pax-exam-testng:${paxExamVersion}"
     integrationCompile "org.ops4j.pax.exam:pax-exam:${paxExamVersion}"
     integrationCompile "org.ops4j.pax.url:pax-url-aether:2.4.5"
     integrationCompile "javax.inject:javax.inject:1"
+    integrationCompile "javax.transaction:jta:1.1"
+    integrationCompile "junit:junit:4.11"
+}
+
+test {
+    useTestNG() {
+        //listeners << 'org.sonar.java.jacoco.TestNGListener'
+    }
+    testLogging.showStandardStreams = true
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
 }
 
 task integrationTest(type: Test) {
+    useTestNG() {
+        //listeners << 'org.sonar.java.jacoco.TestNGListener'
+    }
+    testLogging.showStandardStreams = true
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
     testClassesDir = sourceSets.integration.output.classesDir
     classpath = sourceSets.integration.runtimeClasspath
     outputs.upToDateWhen { false }
+}
+
+tasks.withType(Test) {
+    reports.html.destination = file("${reporting.baseDir}/${name}")
 }
 
 publishing {

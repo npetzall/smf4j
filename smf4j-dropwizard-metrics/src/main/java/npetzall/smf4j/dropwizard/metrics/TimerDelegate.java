@@ -15,6 +15,11 @@ public class TimerDelegate implements npetzall.smf4j.api.metrics.Timer {
         return new ContextDelegate(timer.time());
     }
 
+    @Override
+    public long getCount() {
+        return timer.getCount();
+    }
+
     class ContextDelegate implements ActiveTimer {
 
         private final Timer.Context context;
