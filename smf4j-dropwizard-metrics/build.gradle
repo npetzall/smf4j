@@ -44,7 +44,7 @@ dependencies {
     integrationCompile "org.ops4j.pax.url:pax-url-aether:2.4.5"
     integrationCompile "javax.inject:javax.inject:1"
     integrationCompile "javax.transaction:jta:1.1"
-    integrationCompile "junit:junit:4.11"
+    integrationCompile "junit:junit:4.12"
 }
 
 test {
@@ -58,9 +58,6 @@ test {
 }
 
 task integrationTest(type: Test) {
-    useTestNG() {
-        //listeners << 'org.sonar.java.jacoco.TestNGListener'
-    }
     testLogging.showStandardStreams = true
     beforeTest { descriptor ->
         logger.lifecycle("Running test: " + descriptor)
